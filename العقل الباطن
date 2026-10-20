@@ -1,0 +1,40 @@
+import time
+import math
+
+def subconscious_focus_simulation(duration_seconds=10, fps=30):
+    """
+    محاكاة برمجية لتجربة التركيز الباطني:
+    - نقطة ثابتة في المنتصف تمثل مركز الوعي والحواس.
+    - حركة بصرية خارجية (نقطة متحركة في المدار) تمثل انفصال الجسد أو الحركة الظاهرة،
+      بينما تظل الحواس والروح متجذرة في المركز الثابت.
+    """
+    print("ابدأ بتثبيت بصرك على المركز [O]، ودع عينك تتبع النقطة المتحركة (.) مع بقاء وعيك وحواسك في المنتصف.\n")
+    time.sleep(2)
+    
+    total_frames = duration_seconds * fps
+    delay = 1.0 / fps
+    
+    width = 40
+    center = width // 2
+    
+    for frame in range(total_frames):
+        # حساب حركة النقطة في مسار دائري خارج المركز
+        angle = frame * 0.1
+        offset = int(math.sin(angle) * (center - 2))
+        
+        # بناء سطر العرض
+        line_chars = [' '] * width
+        line_chars[center] = 'O'  # نقطة التركيز الثابتة (الروح/الحواس)
+        
+        dynamic_pos = center + offset
+        if 0 <= dynamic_pos < width and dynamic_pos != center:
+            line_chars[dynamic_pos] = '.'  # حركة الجسد أو العين الظاهرة
+            
+        output = "".join(line_chars)
+        print(f"\r[{output}]", end="", flush=True)
+        time.sleep(delay)
+        
+    print("\n\nانتهت التجربة. الوعي الحقيقي يظل مستقراً في المركز مهما كانت حركة الأطراف أو العينين.")
+
+if __name__ == "__main__":
+    subconscious_focus_simulation()
